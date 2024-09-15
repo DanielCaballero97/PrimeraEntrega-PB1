@@ -43,6 +43,8 @@ export default class ProductsManager {
         products.push(product);
 
         await fs.writeFileSync(PATH,JSON.stringify(products));
+
+        return(product);
         
     }
 

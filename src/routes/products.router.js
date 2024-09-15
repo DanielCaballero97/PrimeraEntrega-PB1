@@ -36,7 +36,7 @@ productsRouter.get("/:pid",async (req,res)=>{
 
 productsRouter.post('/',async (req,res)=>{
     console.log(req.body);
-    const {id,title,description,code,price,status,stock,category,thumbnails} = req.body; //status siempre en TRUE , thumbnails siempre VACIOS
+    const {id,title,description,code,price,status,stock,category,thumbnail} = req.body; //status siempre en TRUE , thumbnails siempre VACIOS
     if(!title||!description||!code||!price||!stock||!category){
         return res.status(400).send({status:"error",error:"datos incompletos"});
     }
@@ -49,10 +49,10 @@ productsRouter.post('/',async (req,res)=>{
         status,
         stock,
         category,
-        thumbnails
+        thumbnail
     }
-    productsManager.addProduct(newProduct);
-    res.sendStatus(201);
+    const product = await productsManager.addProduct(newProduct);
+    res.send(product);
 })
 
 
